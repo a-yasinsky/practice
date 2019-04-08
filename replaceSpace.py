@@ -3,9 +3,11 @@ def replace(str):
 
 print(replace("ffg dffs wefwef     "))
 
-def urlify(string, length):
+def urlify(str, length):
     '''function replaces single spaces with %20 and removes trailing spaces'''
-    new_index = len(string)
+    new_index = len(str)
+
+    string = list(str)
 
     for i in reversed(range(length)):
         if string[i] == ' ':
@@ -17,4 +19,6 @@ def urlify(string, length):
             string[new_index - 1] = string[i]
             new_index -= 1
 
-    return string
+    return "".join(string)
+
+print(urlify("ffg dffs wefwef     ",15))
