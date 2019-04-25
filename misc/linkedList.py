@@ -36,6 +36,25 @@ def detectCycle(head):
             return None
         nodeMap.append(curNode)
         curNode = curNode.next
+def detectCycle2(head):
+    fastRunner = head
+    slowRunner = head
+    firstMeet = False
+    while fastRunner:
+        if fastRunner.next == None or fastRunner.next.next == None:
+            return None
+        slowRunner = slowRunner.next
+        if firstMeet:
+            fastRunner = fastRunner.next
+        else:
+            fastRunner = fastRunner.next.next
+        if slowRunner == fastRunner:
+            if firstMeet:
+                return slowRunner
+            firstMeet = True
+            slowRunner = head
+
 
 head = initLList([-1,-7,7,-4,19,6,-9,-5,-2,-5],6)
+print(detectCycle(head).val)
 print(detectCycle(head).val)
