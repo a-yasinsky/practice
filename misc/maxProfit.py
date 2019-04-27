@@ -1,13 +1,27 @@
-def maxProfit(prices):
-    count = [x for x in range(len(prices))]
-    zipPrices = zip(prices,count)
-    zipPrices = sorted(zipPrices, key = lambda x:x[0])
-    maxDiff = 0
-    ln = len(zipPrices)
-    for i in range(ln):
-        if zipPrices[ln - 1 - i][1] > zipPrices[0][1]:
-            maxDiff = zipPrices[len(zipPrices) -1 - i][0] - zipPrices[i][0]
-            break
-    return list(zipPrices), maxDiff
+def maxProfitN(prices):
+    diffs = [0] * (len(prices) - 1)
+    for x in range(len(prices) - 1):
+        diffs[x] = prices[x+1] - prices[x]
+    maxDif = diffs[0]
+    for i in range(1,len(diffs)):
+        if diffs[i-1] > 0:
+            diffs[i] += diffs[i-1]
+        maxDif = max(maxDif,diffs[i])
+    return maxDif
 
-print(maxProfit([3,3,5,0,0,3,1,4]))
+
+def maxProfit1(prices):
+    dif = prices[1]-prices[0]
+    curSum = dif
+    maxSum = curSum
+    for x in range(1, len(prices)-1):
+        locDif = prices[x+1] - prices[x]
+        if curSum > 0:
+            curSum += locDif
+        else:
+            curSum = locDif
+        maxSum = max(maxSum, curSum)
+    return maxSum
+
+print(maxProfitN([3,3,5,0,0,3,1,4]))
+print(maxProfit1([3,3,5,0,0,3,1,4]))
