@@ -6,7 +6,7 @@ def ladderLength(beginWord, endWord, wordList):
             if bucket in graph:
                 graph[bucket].append(word)
             else:
-                graph[bucket] = []
+                graph[bucket] = [word]
     visited = set()
     queue = [(beginWord,1)]
     while queue:
@@ -20,5 +20,6 @@ def ladderLength(beginWord, endWord, wordList):
                 ns = graph.get(neighsBucket,[])
                 for neight in ns:
                     queue.insert(0, (neight, steps + 1))
+    return 0
 
 print(ladderLength('hit','cog',["hot","dot","dog","lot","log","cog"]))
