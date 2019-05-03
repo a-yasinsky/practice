@@ -1,18 +1,19 @@
-import math
 def checkPerfectNumber(num):
     """
     :type num: int
     :rtype: bool
     """
+    if num <= 0:
+        return False
     i = 1
-    divisors = []
-    while i <= math.sqrt(num):
+    sum = 0
+    while i*i <= num:
         if num % i == 0:
-            if i != num/i and num/i != num:
-                divisors += [i, num/i]
+            if i != num/i:
+                sum += i + num/i
             else:
-                divisors.append(i)
+                sum += i
         i += 1
-    return sum(divisors) == num
+    return sum - num == num
 
 print(checkPerfectNumber(28))
